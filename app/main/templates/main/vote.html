@@ -1,0 +1,16 @@
+{%extends 'main/base.html'%}
+
+{% block title %}
+Vote
+{%endblock%}
+
+{% block content %}
+<form method="post">
+        {% csrf_token %}
+        <input type="radio" id="vote_true" name="fav_language" value="1">
+<label for="vote_true">vote +1</label><br>
+<input type="radio" id="vote_false" name="fav_language" value="-1">
+<label for="vote_false">vote -1</label><br>
+    <button type="submit" class ="btn btn-success">Vote</button>
+</form>
+{%endblock%}
