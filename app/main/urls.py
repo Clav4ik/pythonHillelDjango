@@ -12,6 +12,6 @@ urlpatterns = [
     path('movies/top', get_top_movies, name='top_movies'),
     path('movies/top/<int:int_value>', get_top_movies_int_value,
          name='top_movies_int_value'),
-    path('movies/<movie_pk>/rate', Vote.as_view(), name='vote'),
+    path('movies/<movie_pk>/rate', Vote.as_view(), name='vote')
 
     ]

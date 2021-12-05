@@ -1,9 +1,15 @@
+from django.contrib import messages
+from django.contrib.auth import authenticate, logout, login, get_user_model
+from django.contrib.auth.models import User
+from django.contrib.auth.views import LoginView
+from django.core.exceptions import ValidationError
 from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404, redirect
 from django.shortcuts import render
 from django.http import HttpResponse
 # Create your views here.
-from django.views.generic import TemplateView
+from django.urls import reverse_lazy
+from django.views.generic import TemplateView, CreateView
 
 from .forms import MovieCreateForm
 from .models import *
@@ -72,7 +78,7 @@ def get_top_movies_int_value(request, int_value):
 
 
 class Vote(TemplateView):
-    template_name = 'main/vote.html'
+    template_name = 'user_auth/vote.html'
 
     def get(self, request, movie_pk):
         return render(request, 'main/vote.html')
