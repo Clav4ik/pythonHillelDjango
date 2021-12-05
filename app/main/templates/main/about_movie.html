@@ -1,0 +1,21 @@
+{%extends 'main/base.html'%}
+
+{% block title %}
+{{title}}
+{%endblock%}
+{% block content %}
+{% if movie.picture %}
+    {{movie.picture}}
+{%endif%}
+    <h1>{{movie}}</h1>
+    <h2>Director - {{movie.director}}</h2>
+<p>Genre : {% for el in movie.genre.all %}
+    {{el}},
+{% endfor %}</p>
+<h3> Actors : {% for el in movie.actors.all %}
+{{el}},
+{% endfor %}</h3>
+    <p><b>About movie:</b></p>
+    <p>{{movie.data}}</p>
+    <h4>{{movie.raiting}}</h4>
+{%endblock%}

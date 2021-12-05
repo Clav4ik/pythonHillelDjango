@@ -1,0 +1,42 @@
+{%extends 'main/base.html'%}
+
+{% block title %}
+{{title}}
+{%endblock%}
+
+{% block content %}
+
+{% for el in page_obj %}
+            <a href="{% url 'about_movie' el.pk %}">
+                <h3>{{ el }}</h3>
+            </a>
+
+
+
+        {% endfor %}
+<form method="post">
+        {% csrf_token %}
+        {{error}}<br>
+        {{form.title}}<br>
+        {{form.release_date}}<br>
+        {{form.genre}}<br>
+        {{form.director}}<br>
+        {{form.actors}}<br>
+        {{form.data}}<br>
+
+
+        <button type="submit" class ="btn btn-success">add movie</button>
+
+    </form>
+
+{% for p in page_obj.paginator.page_range %}
+                {% if page_obj.number == p %}
+                    <li class="page-num page-num-selected">{{ p }}</li>
+                {% elif p >= page_obj.number|add:-2 and p <= page_obj.number|add:2 %}
+                    <li class="page-num">
+
+                        <a  href="?page={{ p }}">{{ p }}</a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+{%endblock%}
