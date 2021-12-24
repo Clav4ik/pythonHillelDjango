@@ -54,7 +54,6 @@ class AllMovies(TemplateView):
 
 def get_about_movie(request, movie_pk):
     post_about_movie = get_object_or_404(Movie, pk=movie_pk)
-    # about = Movie_Genre.objects.all()
     return render(request, 'main/about_movie.html', {'title': post_about_movie,
                                                      "movie": post_about_movie})
 
@@ -75,10 +74,11 @@ def get_top_movies_int_value(request, int_value):
 class Vote(TemplateView):
     template_name = 'main/vote.html'
 
-    def get(self, request,movie_pk):
+    def get(self, request, movie_pk):
         return render(request, 'main/vote.html')
 
     def post(self, request,movie_pk):
+
         movie = Movie.objects.get(pk=movie_pk)
         movie.raiting+= int(request.POST['fav_language'])
         movie.save()
