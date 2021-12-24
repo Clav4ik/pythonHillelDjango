@@ -1,0 +1,29 @@
+{%extends 'user_auth/base.html'%}
+{% load static %}
+
+
+{% block title %}Вход{%endblock%}
+
+{% block add_link %}
+
+<link rel="stylesheet" href="{% static 'user_auth/css/register_and_login.css'%}" type="text/css">
+
+{%endblock%}
+
+{% block content %}
+
+<form id="register_and_login" action="" method="post">
+    {% csrf_token %}
+    <div class="form-error">{{ form.non_field_errors }}</div>
+
+    {% for ff in form %}
+    <p><label class="form-label" for="{{ ff.id_for_label }}">{{ff.label}}: </label>{{ ff }}</p>
+    <div class="form-error">{{ ff.errors }}</div>
+    {% endfor %}
+        <button type="submit">Войти</button>
+
+
+</form>
+
+
+{%endblock%}

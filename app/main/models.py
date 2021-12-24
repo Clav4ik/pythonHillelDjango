@@ -1,5 +1,7 @@
 from django.db import models
-import datetime
+from django.contrib.auth.models import AbstractUser
+from django.utils.translation import gettext_lazy as _
+
 # Create your models here.
 class Actor(models.Model):
     name = models.CharField("Actor name", max_length=60)
@@ -28,3 +30,5 @@ class Movie(models.Model):
 
     def __str__(self):
         return '{} ({})'.format(self.title, self.release_date)
+
+
