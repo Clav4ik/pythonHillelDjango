@@ -60,6 +60,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
     'main.middletvar.RequestInfoTime'
+
 ]
 
 ROOT_URLCONF = 'app.urls'
