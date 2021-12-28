@@ -12,7 +12,7 @@ from django.urls import reverse_lazy
 from django.views.generic import TemplateView, CreateView
 
 from .forms import RegisterUserForm, LoginUserForm
-from .models import *
+
 # Create your views here.
 
 class RegisterFormViewUser(CreateView):

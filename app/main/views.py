@@ -1,18 +1,12 @@
-from django.contrib import messages
-from django.contrib.auth import authenticate, logout, login, get_user_model
-from django.contrib.auth.models import User
-from django.contrib.auth.views import LoginView
-from django.core.exceptions import ValidationError
 from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404, redirect
 from django.shortcuts import render
 from django.http import HttpResponse
-# Create your views here.
-from django.urls import reverse_lazy
+
 from django.views.generic import TemplateView, CreateView
 
-from .forms import MovieCreateForm
-from .models import *
+from main.forms import MovieCreateForm
+from main.models import Movie, Director, Actor, Genre
 
 
 def index(request):
@@ -37,6 +31,7 @@ class AllMovies(TemplateView):
             'title': 'All movies'
         }
         return render(request, 'main/index.html', context)
+
     def post(self, request):
         try:
             dir = request.POST.get('director')
@@ -44,9 +39,9 @@ class AllMovies(TemplateView):
             actor = Actor.objects.create(name=request.POST['actors'])
             actor.save()
             movie = Movie.objects.create(title=request.POST['title'],
-                                        data=request.POST['data'],
-                                        release_date=request.POST['release_date'],
-                                        director=director)
+                                         data=request.POST['data'],
+                                         release_date=request.POST['release_date'],
+                                         director=director)
 
             movie.save()
             movie.actors.add(actor)
@@ -55,7 +50,6 @@ class AllMovies(TemplateView):
             return redirect('home')  # переадресация на страничку home
         except:
             return self.get(request)
-
 
 
 def get_about_movie(request, movie_pk):
@@ -74,7 +68,7 @@ def get_top_movies(request):
 def get_top_movies_int_value(request, int_value):
     movies = Movie.objects.order_by('-raiting')[:int_value]
     return render(request, 'main/top_movies.html', {'title': 'Top movies',
-                                               "movies": movies})
+                                                    "movies": movies})
 
 
 class Vote(TemplateView):
@@ -83,9 +77,8 @@ class Vote(TemplateView):
     def get(self, request, movie_pk):
         return render(request, 'main/vote.html')
 
-    def post(self, request,movie_pk):
-
+    def post(self, request, movie_pk):
         movie = Movie.objects.get(pk=movie_pk)
-        movie.raiting+= int(request.POST['fav_language'])
+        movie.raiting += int(request.POST['fav_language'])
         movie.save()
-        return redirect('about_movie',movie_pk)
+        return redirect('about_movie', movie_pk)

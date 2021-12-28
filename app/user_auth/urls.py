@@ -1,13 +1,7 @@
 
+from django.urls import path
 
-
-
-
-from django.urls import path, include
-
-from app import settings
-from .views import *
-from django.views.decorators.cache import cache_page
+from user_auth.views import RegisterFormViewUser, LoginUser, logout_user
 
 urlpatterns = [
 

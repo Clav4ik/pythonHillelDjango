@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class MovieApiConfig(AppConfig):
+class ApiUserAuthConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'movie_api'
+    name = 'api_user_auth'
