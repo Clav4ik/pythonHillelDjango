@@ -45,7 +45,7 @@ class AboutMovieAPIView(ListAPIView):
 
 
 class VoteAPIView(APIView):
-
+    permission_classes = (IsAuthenticated,)
     def get(self, request, movie_pk):
         queryset = Movie.objects.get(pk=movie_pk)
         serializers = MovieRateSerializers(queryset)
