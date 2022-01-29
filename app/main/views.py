@@ -34,10 +34,10 @@ class AllMovies(TemplateView):
 
     def post(self, request):
         try:
-            dir = request.POST.get('director')
-            director = Director.objects.create(name=dir)
-            actor = Actor.objects.create(name=request.POST['actors'])
-            actor.save()
+
+            director = Director.objects.get(name=request.POST['director'])
+            actor = Actor.objects.get(name=request.POST['actors'])
+            genre = Genre.objects.get(title=request.POST['genre'])
             movie = Movie.objects.create(title=request.POST['title'],
                                          data=request.POST['data'],
                                          release_date=request.POST['release_date'],
@@ -45,8 +45,9 @@ class AllMovies(TemplateView):
 
             movie.save()
             movie.actors.add(actor)
-            genre = Genre.objects.get(title=request.POST['genre'])
+
             movie.genre.add(genre)
+
             return redirect('home')  # переадресация на страничку home
         except:
             return self.get(request)
