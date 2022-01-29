@@ -1,7 +1,7 @@
 from django.urls import path, include
 
 from app import settings
-from .views import *
+from main.views import index, AllMovies, get_about_movie, get_top_movies, get_top_movies_int_value, Vote
 from django.views.decorators.cache import cache_page
 
 urlpatterns = [
