@@ -16,7 +16,7 @@ app.config_from_object('django.conf:settings', namespace='CELERY')
 app.autodiscover_tasks()
 app.conf.beat_schedule = {
     'add_every_day': {'task':'main.tasks.check_flag',
-                      'schedule': 10
+                      'schedule': 60 * 60 * 24
                       }
 }
-#60 * 60 * 24
+
