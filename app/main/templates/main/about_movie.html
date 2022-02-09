@@ -5,7 +5,8 @@
 {%endblock%}
 {% block content %}
 {% if movie.picture %}
-    {{movie.picture}}
+<img src= {{movie.picture}} alt="Italian Trulli" width="500" height="333">
+<picture>{{movie.picture}} as ex</picture>
 {%endif%}
     <h1>{{movie}}</h1>
     <h2>Director - {{movie.director}}</h2>

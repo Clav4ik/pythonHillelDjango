@@ -16,7 +16,6 @@ class AllMovieListAPIView(ListCreateAPIView):
         return queryset
 
     def post_queryset(self, serializer):
-
         try:
             serializer.save()
         except Exception as ex:
