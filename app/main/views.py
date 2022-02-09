@@ -28,8 +28,7 @@ class AllMovies(TemplateView):
             'form': form,
             'error': error,
             'page_obj': page_obj,
-            'title': 'All movies'
-        }
+            'title': 'All movies',}
         return render(request, 'main/index.html', context)
 
     def post(self, request):

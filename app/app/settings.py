@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'user_auth',
     'movie_api',
     'api_user_auth',
+    'django_celery_results',
+    'django_celery_beat'
 
 ]
 
@@ -127,6 +129,21 @@ USE_L10N = True
 
 USE_TZ = True
 
+CELERY_TIMEZONE = "UTC"
+CELERY_TASK_TRACK_STARTED = True
+CELERY_TASK_TIME_LIMIT = 30 * 60
+
+CELERY_BROKER = 'pyamqp://guest@localhost//'
+CELERY_RESULT_BACKEND = 'django-db'
+CELERY_CACHE_BACKEND = 'django-cache'
+
+# # django setting.
+# CACHES = {
+#     'default': {
+#         'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+#         'LOCATION': 'my_cache_table',
+#     }
+# }
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
