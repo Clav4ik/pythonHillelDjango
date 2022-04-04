@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'movie_api',
     'api_user_auth',
     'django_celery_results',
-    'django_celery_beat'
+    'django_celery_beat',
+    'django_filters',
 
 ]
 
@@ -52,7 +53,8 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',  # <-- And here
     ],
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
-    'PAGE_SIZE': 5
+    'PAGE_SIZE': 20,
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
 }
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

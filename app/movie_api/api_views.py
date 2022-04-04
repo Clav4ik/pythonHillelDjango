@@ -1,6 +1,6 @@
-
-from rest_framework.generics import ListAPIView, ListCreateAPIView, UpdateAPIView, RetrieveUpdateAPIView, \
-    get_object_or_404
+from rest_framework import filters
+from rest_framework.generics import ListAPIView, ListCreateAPIView, UpdateAPIView, RetrieveUpdateAPIView
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.permissions import IsAuthenticated
 from main.models import Movie
 from rest_framework.response import Response
@@ -10,6 +10,10 @@ from .serializers import AllMovieSerializers, MovieRateSerializers
 
 class AllMovieListAPIView(ListCreateAPIView):
     serializer_class = AllMovieSerializers
+    filter_backends = [DjangoFilterBackend, filters.OrderingFilter]
+    filterset_fields = ['title', 'release_date']
+    ordering_fields = ['title', 'release_date']
+    ordering = ['-release_date']
 
     def get_queryset(self):
         queryset = Movie.objects.all()
@@ -24,11 +28,18 @@ class AllMovieListAPIView(ListCreateAPIView):
 
 class TopMovieListAPIView(ListAPIView):
     serializer_class = AllMovieSerializers
-    queryset = Movie.objects.order_by('-raiting')[:100]
+    filter_backends = [DjangoFilterBackend, filters.OrderingFilter]
+    filterset_fields = ['title', 'release_date']
+    ordering_fields = ['raiting']
+    ordering = ['-raiting']
+    queryset= Movie.objects.all()
+
 
 
 class TopVaMovieLiluestAPIView(ListAPIView):
     serializer_class = AllMovieSerializers
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['title', 'release_date']
 
     def get_queryset(self):
         queryset = Movie.objects.order_by('-raiting')[:self.kwargs['int_value']]
