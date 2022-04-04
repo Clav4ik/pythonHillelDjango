@@ -29,7 +29,7 @@ class Movie(models.Model):
     data = models.TextField("Movie data", default="")
     picture = models.ImageField("Movie picture", null=True)
     genre = models.ManyToManyField(Genre)
-    director = models.ForeignKey(Director, on_delete=models.PROTECT, null=True)
+    director = models.ForeignKey(Director, on_delete=models.CASCADE, null=True)
     release_date = models.DateField("Movie release_date", null=True)
     raiting = models.IntegerField("Movie raiting", default=0, db_index=True)
     actors = models.ManyToManyField(Actor)
