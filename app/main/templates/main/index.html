@@ -5,7 +5,7 @@
 {%endblock%}
 
 {% block content %}
-
+{{task}}
 {% for el in page_obj %}
             <a href="{% url 'about_movie' el.pk %}">
                 <h3>{{ el }}</h3>
