@@ -24,7 +24,7 @@ SECRET_KEY = 'django-insecure-_a$1tjiros^*vkpam)6u%8dmvc0cd2z9774e!t&ee^u)bp72(n
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -134,12 +134,12 @@ USE_TZ = True
 
 CELERY_TIMEZONE = "UTC"
 CELERY_TASK_TRACK_STARTED = True
-CELERY_TASK_TIME_LIMIT = 30 * 60
+CELERY_TASK_TIME_LIMIT = 10
 
-CELERY_BROKER = 'pyamqp://guest@localhost//'
+CELERY_BROKER_URL = 'amqp://guest:guest@localhost:5672//'
 CELERY_RESULT_BACKEND = 'django-db'
-CELERY_CACHE_BACKEND = 'django-cache'
-
+CELERY_CACHE_BACKEND = 'default'
+CELERY_BEAT_SCHEDULER='django_celery_beat.schedulers:DatabaseScheduler'
 # # django setting.
 # CACHES = {
 #     'default': {
