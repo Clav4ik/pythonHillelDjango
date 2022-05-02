@@ -2,8 +2,8 @@ from celery import shared_task
 from main.models import UserProfile
 from app.celery import app
 
-@app.task(bind=True)
-def check_flag(self):
+@app.task()
+def check_flag():
 
     users = UserProfile.objects.filter(is_notified=False)
     for user in users:
